@@ -22,3 +22,17 @@ Backend services for Aidnara AI.
 - Keep service role keys here only.
 - Never expose AI keys to frontend.
 - Validate wallet ownership before proof or certificate writes.
+
+## Current Baseline
+
+- `db/schema.sql`: Supabase-compatible database schema.
+- `src/services/`: AI report, certificate, and storage service helpers.
+- `src/routes/`: runtime-agnostic route handlers.
+- `src/repositories/`: thin database repository layer.
+- `self-check.js`: dependency-free backend sanity check.
+
+## Check
+
+```bash
+npm run check
+```
