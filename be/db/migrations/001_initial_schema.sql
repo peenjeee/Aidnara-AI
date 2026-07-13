@@ -1,4 +1,4 @@
--- Deprecated entrypoint: use be/db/migrations/001_initial_schema.sql for execution.
+create extension if not exists pgcrypto;
 
 create table if not exists campaigns (
   id uuid primary key default gen_random_uuid(),
@@ -71,6 +71,10 @@ alter table donations
   foreign key (certificate_id) references certificates(id) on delete set null;
 
 create index if not exists campaigns_owner_address_idx on campaigns(owner_address);
+create index if not exists campaigns_chain_campaign_id_idx on campaigns(chain_campaign_id);
 create index if not exists donations_campaign_id_idx on donations(campaign_id);
+create index if not exists donations_tx_hash_idx on donations(tx_hash);
 create index if not exists proofs_campaign_id_idx on proofs(campaign_id);
+create index if not exists proofs_file_hash_idx on proofs(file_hash);
 create index if not exists certificates_hash_idx on certificates(certificate_hash);
+create index if not exists certificates_campaign_id_idx on certificates(campaign_id);

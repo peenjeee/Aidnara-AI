@@ -26,6 +26,8 @@ Backend services for Aidnara AI.
 ## Current Baseline
 
 - `db/schema.sql`: Supabase-compatible database schema.
+- `db/migrations/`: versioned schema and RLS migrations.
+- `db/storage.md`: storage bucket plan and upload rules.
 - `src/services/`: AI report, certificate, and storage service helpers.
 - `src/routes/`: runtime-agnostic route handlers.
 - `src/repositories/`: thin database repository layer.
