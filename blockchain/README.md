@@ -13,8 +13,22 @@ Smart contract workspace for Aidnara AI.
 ## Suggested Stack
 
 - Solidity
-- Hardhat or Thirdweb
+- Hardhat
+- ethers.js
 - BNB Smart Chain Testnet
+- BscScan Testnet
+
+## Stack Logos
+
+<div align="center">
+  <img src="https://skillicons.dev/icons?i=solidity,ethereum&theme=dark" alt="Solidity and EVM icons" />
+  <br />
+  <br />
+  <img src="https://img.shields.io/badge/BNB%20Smart%20Chain-F3BA2F?style=for-the-badge&logo=binance&logoColor=black" alt="BNB Smart Chain" />
+  <img src="https://img.shields.io/badge/Hardhat-FFF100?style=for-the-badge&logo=ethereum&logoColor=111111" alt="Hardhat" />
+  <img src="https://img.shields.io/badge/ethers.js-2535A0?style=for-the-badge&logo=ethereum&logoColor=white" alt="ethers.js" />
+  <img src="https://img.shields.io/badge/BscScan-121D33?style=for-the-badge&logo=binance&logoColor=F3BA2F" alt="BscScan" />
+</div>
 
 ## Network
 

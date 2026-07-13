@@ -5,6 +5,7 @@ const path = require('path');
 
 const root = path.resolve(__dirname, '..');
 const requiredFiles = [
+  'README.md',
   'fe/README.md',
   'be/README.md',
   'api/README.md',
@@ -51,6 +52,7 @@ const requiredTerms = [
   ['api/certificates.md', ['POST /api/certificates/generate', 'GET /api/certificates/[hash]']],
   ['api/storage.md', ['POST /api/storage/signed-upload', 'Max proof file size']],
   ['blockchain/README.md', ['Smart contract workspace', 'BNB Smart Chain Testnet', 'MVP Contract Functions']],
+  ['README.md', ['BNB Smart Chain', 'skillicons.dev', 'wagmi', 'RainbowKit', 'BscScan']],
   ['blockchain/contracts/AidnaraAidRegistry.sol', ['contract AidnaraAidRegistry', 'createCampaign', 'donate', 'submitProof', 'issueCertificate', 'verifyCertificate', 'totalWithdrawn']],
   ['blockchain/hardhat.config.ts', ['bnbTestnet', 'chainId: 97']],
   ['blockchain/package.json', ['compile', 'test', 'deploy:testnet']],

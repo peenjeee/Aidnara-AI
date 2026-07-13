@@ -103,6 +103,21 @@ scripts/      Local verification and security checks
 
 ## Suggested Tech Stack
 
+<div align="center">
+  <img src="https://skillicons.dev/icons?i=ts,nextjs,tailwind,nodejs,postgres,supabase,solidity,ethereum,vercel&theme=dark" alt="Aidnara AI tech stack icons" />
+  <br />
+  <br />
+  <img src="https://img.shields.io/badge/BNB%20Smart%20Chain-F3BA2F?style=for-the-badge&logo=binance&logoColor=black" alt="BNB Smart Chain" />
+  <img src="https://img.shields.io/badge/Hardhat-FFF100?style=for-the-badge&logo=ethereum&logoColor=111111" alt="Hardhat" />
+  <img src="https://img.shields.io/badge/ethers.js-2535A0?style=for-the-badge&logo=ethereum&logoColor=white" alt="ethers.js" />
+  <img src="https://img.shields.io/badge/viem-111111?style=for-the-badge&logo=ethereum&logoColor=white" alt="viem" />
+  <img src="https://img.shields.io/badge/wagmi-000000?style=for-the-badge&logo=walletconnect&logoColor=white" alt="wagmi" />
+  <img src="https://img.shields.io/badge/RainbowKit-0E76FD?style=for-the-badge&logo=walletconnect&logoColor=white" alt="RainbowKit" />
+  <img src="https://img.shields.io/badge/BscScan-121D33?style=for-the-badge&logo=binance&logoColor=F3BA2F" alt="BscScan" />
+</div>
+
+### Stack Breakdown
+
 Frontend:
 
 - Next.js
@@ -123,8 +138,17 @@ Backend:
 Blockchain:
 
 - Solidity
-- Hardhat or Thirdweb
+- Hardhat
+- ethers.js
 - BNB Smart Chain Testnet
+- BscScan Testnet
+
+Web3 frontend:
+
+- wagmi
+- viem
+- RainbowKit
+- WalletConnect-compatible wallet flow
 
 Deployment:
 
@@ -191,4 +215,4 @@ The check validates:
 
 ## Status
 
-Current repository status: PRD and folder structure prepared. MVP implementation is not scaffolded yet.
+Current repository status: PRD, backend baseline, blockchain contract, and Hardhat test suite prepared. Frontend scaffold and API runtime are next.

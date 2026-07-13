@@ -8,9 +8,13 @@ Frontend:
 - TypeScript
 - Tailwind CSS
 - shadcn/ui
+
+Web3 frontend:
+
 - wagmi
 - RainbowKit
 - viem
+- WalletConnect-compatible wallet flow
 
 Backend:
 
@@ -22,8 +26,16 @@ Backend:
 Blockchain:
 
 - Solidity
-- Hardhat or Thirdweb
+- Hardhat
+- ethers.js
 - BNB Smart Chain Testnet
+- BscScan Testnet
+
+Web3 and blockchain logo sources:
+
+- `skillicons.dev`: Solidity and Ethereum-style EVM icon.
+- `img.shields.io`: BNB Smart Chain, Hardhat, ethers.js, viem, wagmi, RainbowKit, and BscScan badges.
+- README badges should follow the style used in `RamsNotes31/RamsNotes31`.
 
 Deployment:
 
