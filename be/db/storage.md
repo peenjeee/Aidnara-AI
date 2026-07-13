@@ -6,6 +6,8 @@
 - `proofs`: public read for MVP, server-only write.
 - `certificates`: public read, server-only write.
 
+Executable setup lives in `be/db/migrations/003_storage_buckets.sql`.
+
 ## File Limits
 
 - Campaign cover: image only, max 3 MB.
@@ -27,6 +29,7 @@ certificate/{timestamp}-{safe-file-name}
 - Validate file type and size before upload.
 - Store uploaded SVG only as download, never render it as trusted HTML.
 - Proof and certificate hashes are computed before metadata is persisted.
+- Do not add anon/authenticated write policies for MVP buckets.
 
 ## Future Upgrade
 
