@@ -1,0 +1,7 @@
+import { handleListProofsRequest } from '@aidnara/be';
+
+export const runtime = 'nodejs';
+
+export function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
+  return params.then(({ id }) => handleListProofsRequest(request, id));
+}

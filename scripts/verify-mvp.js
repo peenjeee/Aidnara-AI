@@ -7,6 +7,15 @@ const root = path.resolve(__dirname, '..');
 const requiredFiles = [
   'README.md',
   'fe/README.md',
+  'fe/package.json',
+  'fe/self-check.js',
+  'fe/app/page.tsx',
+  'fe/app/api/campaigns/route.ts',
+  'fe/app/api/donations/route.ts',
+  'fe/app/api/proofs/route.ts',
+  'fe/app/api/ai/impact-report/route.ts',
+  'fe/app/api/certificates/generate/route.ts',
+  'fe/app/api/storage/signed-upload/route.ts',
   'be/README.md',
   'api/README.md',
   'blockchain/README.md',
@@ -78,7 +87,16 @@ const requiredFiles = [
 ];
 
 const requiredTerms = [
-  ['fe/README.md', ['Frontend app', 'Pages']],
+  ['fe/README.md', ['Frontend app', 'Pages', 'API Routes']],
+  ['fe/package.json', ['next', 'react', 'check']],
+  ['fe/self-check.js', ['FE self-check passed', 'Backend adapter import missing']],
+  ['fe/app/page.tsx', ['Aidnara AI', 'Transparent Aid, Verified Impact']],
+  ['fe/app/api/campaigns/route.ts', ['handleCreateCampaignRequest', 'handleListCampaignsRequest']],
+  ['fe/app/api/donations/route.ts', ['handleCreateDonationRequest']],
+  ['fe/app/api/proofs/route.ts', ['handleCreateProofRequest']],
+  ['fe/app/api/ai/impact-report/route.ts', ['handleImpactReportRequest']],
+  ['fe/app/api/certificates/generate/route.ts', ['handleGenerateCertificateRequest']],
+  ['fe/app/api/storage/signed-upload/route.ts', ['handleSignedUploadRequest']],
   ['be/README.md', ['Backend services', 'Server-Only Rules']],
   ['api/README.md', ['API contract', 'MVP Endpoints']],
   ['api/ai-impact-report.md', ['POST /api/ai/impact-report', 'trustScore']],

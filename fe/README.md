@@ -22,6 +22,8 @@ Frontend app for Aidnara AI.
 - RainbowKit
 - viem
 
+Wallet dependencies are documented here but intentionally not installed until wallet UI starts.
+
 ## Pages
 
 - `/`
@@ -31,3 +33,23 @@ Frontend app for Aidnara AI.
 - `/campaigns/[id]/proofs/create`
 - `/certificates/[id]`
 - `/verify/certificate/[hash]`
+
+## API Routes
+
+- `/api/campaigns`
+- `/api/campaigns/[id]`
+- `/api/campaigns/[id]/donations`
+- `/api/campaigns/[id]/proofs`
+- `/api/donations`
+- `/api/proofs`
+- `/api/ai/impact-report`
+- `/api/certificates/generate`
+- `/api/certificates/[hash]`
+- `/api/storage/signed-upload`
+
+## Check
+
+```bash
+npm run check
+npm run typecheck
+```

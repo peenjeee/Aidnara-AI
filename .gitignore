@@ -8,6 +8,7 @@ dist/
 build/
 coverage/
 out/
+*.tsbuildinfo
 
 # env and secrets
 .env
