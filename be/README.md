@@ -52,5 +52,6 @@ Backend services for Aidnara AI.
 
 ```bash
 npm run check
+npm run check:runtime
 npm run typecheck
 ```

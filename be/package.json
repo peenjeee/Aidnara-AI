@@ -2,7 +2,9 @@
   "name": "aidnara-ai-be",
   "private": true,
   "scripts": {
+    "build": "tsc",
     "check": "node self-check.js",
+    "check:runtime": "npm run build && node dist/runtime-self-check.js",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

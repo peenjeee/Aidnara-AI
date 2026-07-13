@@ -22,6 +22,11 @@ export function requireOptionalString(value: unknown, field: string) {
 }
 
 export function requirePositiveNumberString(value: unknown, field: string) {
+  if (typeof value === 'number') {
+    if (!Number.isFinite(value) || value <= 0) throw new Error(`${field} must be a positive number`);
+    return String(value);
+  }
+
   const stringValue = requireString(value, field);
   if (!Number.isFinite(Number(stringValue)) || Number(stringValue) <= 0) {
     throw new Error(`${field} must be a positive number`);
