@@ -1,6 +1,7 @@
 export * from './config/env';
 export * from './lib/hash';
 export * from './lib/http';
+export * from './lib/rate-limit';
 export * from './lib/requests';
 export * from './lib/supabase-admin';
 export * from './lib/validate';

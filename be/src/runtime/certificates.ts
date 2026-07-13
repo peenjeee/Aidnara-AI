@@ -1,4 +1,6 @@
 import { fail, ok } from '../lib/http';
+import { assertRateLimit, backendRateLimits } from '../lib/rate-limit';
+import { parseCertificateGenerateRequest } from '../lib/requests';
 import { createSupabaseAdmin } from '../lib/supabase-admin';
 import {
   createCertificate,
@@ -14,6 +16,9 @@ export async function generateAndStoreCertificate(
   options: { db?: DbClient; certificateUri?: string } = {},
 ) {
   try {
+    const payload = parseCertificateGenerateRequest(body);
+    assertRateLimit({ key: `certificate:${payload.recipientAddress}:${payload.campaignId}`, ...backendRateLimits.certificate });
+
     const generated = generateCertificate(body as never);
     const db = options.db || (createSupabaseAdmin() as unknown as DbClient);
     const certificate = await createCertificate(

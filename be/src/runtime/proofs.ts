@@ -1,4 +1,5 @@
 import { fail, ok } from '../lib/http';
+import { assertRateLimit, backendRateLimits } from '../lib/rate-limit';
 import { parseCreateProofRequest } from '../lib/requests';
 import { createSupabaseAdmin } from '../lib/supabase-admin';
 import { getCampaignById, updateCampaignTrustScore } from '../repositories/campaigns';
@@ -14,6 +15,8 @@ import { type ImpactReport } from '../services/ai-impact-report';
 export async function createProofRuntime(body: unknown, db = createSupabaseAdmin() as unknown as DbClient) {
   try {
     const { ownerAddress, proof } = parseCreateProofRequest(body);
+    assertRateLimit({ key: `proof:${ownerAddress}:${proof.campaign_id}`, ...backendRateLimits.proof });
+
     const campaign = await getCampaignById(db, proof.campaign_id);
 
     if (campaign.owner_address.toLowerCase() !== ownerAddress.toLowerCase()) {

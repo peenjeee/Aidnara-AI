@@ -40,6 +40,7 @@ Backend services for Aidnara AI.
 - `src/services/supabase-storage.ts`: Supabase signed upload helper.
 - `src/routes/`: runtime-agnostic route handlers.
 - `src/lib/requests.ts`: request validation for API payloads.
+- `src/lib/rate-limit.ts`: dependency-free abuse guard for AI, proof, upload, and certificate actions.
 - `src/repositories/`: thin database repository layer.
 - `self-check.js`: dependency-free backend sanity check.
 
