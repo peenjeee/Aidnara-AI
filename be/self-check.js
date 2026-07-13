@@ -111,5 +111,8 @@ assertSourceExport('services/onchain.ts', 'validateDonationEvent');
 assertSourceExport('services/onchain.ts', 'DonationReceived');
 assertSourceExport('services/onchain-events.ts', 'listAidnaraEvents');
 assertSourceExport('services/onchain-events.ts', 'normalizeArgs');
+assertSourceExport('adapters/web.ts', 'handleCreateCampaignRequest');
+assertSourceExport('adapters/web.ts', 'handleImpactReportRequest');
+assertSourceExport('adapters/web.ts', 'handleSignedUploadRequest');
 
 console.log('OK: BE self-check passed.');

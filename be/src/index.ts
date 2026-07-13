@@ -1,4 +1,5 @@
 export * from './config/env';
+export * from './adapters/web';
 export * from './lib/hash';
 export * from './lib/http';
 export * from './lib/rate-limit';

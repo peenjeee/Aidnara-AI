@@ -42,6 +42,7 @@ Backend services for Aidnara AI.
 - `src/services/supabase-storage.ts`: Supabase signed upload helper.
 - `src/services/onchain.ts`: ethers-based contract event validation helpers.
 - `src/services/onchain-events.ts`: ethers-based event indexer helpers.
+- `src/adapters/web.ts`: Web `Request`/`Response` adapters for Next.js route handlers.
 - `src/routes/`: runtime-agnostic route handlers.
 - `src/lib/requests.ts`: request validation for API payloads.
 - `src/lib/rate-limit.ts`: dependency-free abuse guard for AI, proof, upload, and certificate actions.
