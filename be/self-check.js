@@ -41,6 +41,12 @@ function assertRepositoryExport(file, exportName) {
   assert(readFileSync(path, 'utf8').includes(exportName), `${exportName} missing in ${file}`);
 }
 
+function assertSourceExport(relativePath, exportName) {
+  const path = join(root, 'src', relativePath);
+  assert(existsSync(path), `${relativePath} missing`);
+  assert(readFileSync(path, 'utf8').includes(exportName), `${exportName} missing in ${relativePath}`);
+}
+
 const payloadA = { b: 2, a: { d: 4, c: 3 } };
 const payloadB = { a: { c: 3, d: 4 }, b: 2 };
 assert(stableJsonHash(payloadA) === stableJsonHash(payloadB), 'stable hash must ignore key order');
@@ -65,5 +71,12 @@ assertTrustScore(report.trustScore);
 assertRepositoryExport('campaigns.ts', 'createCampaign');
 assertRepositoryExport('proofs.ts', 'createProof');
 assertRepositoryExport('certificates.ts', 'createCertificate');
+assertSourceExport('lib/requests.ts', 'parseImpactReportRequest');
+assertSourceExport('lib/requests.ts', 'parseCertificateGenerateRequest');
+assertSourceExport('lib/requests.ts', 'parseSignedUploadRequest');
+assertSourceExport('routes/ai-impact-report.ts', 'handleCreateImpactReport');
+assertSourceExport('routes/certificates.ts', 'handleGenerateCertificate');
+assertSourceExport('routes/storage.ts', 'prepareSignedUpload');
+assertSourceExport('routes/certificate-lookup.ts', 'lookupCertificate');
 
 console.log('OK: BE self-check passed.');

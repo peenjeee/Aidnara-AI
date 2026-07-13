@@ -30,6 +30,7 @@ Backend services for Aidnara AI.
 - `db/storage.md`: storage bucket plan and upload rules.
 - `src/services/`: AI report, certificate, and storage service helpers.
 - `src/routes/`: runtime-agnostic route handlers.
+- `src/lib/requests.ts`: request validation for API payloads.
 - `src/repositories/`: thin database repository layer.
 - `self-check.js`: dependency-free backend sanity check.
 
