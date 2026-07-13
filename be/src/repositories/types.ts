@@ -7,8 +7,17 @@ export type DbTable<TInsert, TSelect> = {
     };
   };
   select(columns?: string): {
+    order(column: string, options?: { ascending?: boolean }): QueryResult<TSelect[]>;
     eq(column: string, value: string | number): {
       single(): QueryResult<TSelect>;
+      order(column: string, options?: { ascending?: boolean }): QueryResult<TSelect[]>;
+    };
+  };
+  update(value: Partial<TSelect>): {
+    eq(column: string, value: string | number): {
+      select(): {
+        single(): QueryResult<TSelect>;
+      };
     };
   };
 };
@@ -21,4 +30,9 @@ export function unwrap<T>(result: { data: T | null; error: Error | null }, fallb
   if (result.error) throw result.error;
   if (!result.data) throw new Error(fallback);
   return result.data;
+}
+
+export function unwrapList<T>(result: { data: T[] | null; error: Error | null }): T[] {
+  if (result.error) throw result.error;
+  return result.data || [];
 }

@@ -1,4 +1,4 @@
-import { type DbClient, unwrap } from './types';
+import { type DbClient, unwrap, unwrapList } from './types';
 
 export type CampaignInsert = {
   chain_campaign_id?: number;
@@ -41,4 +41,39 @@ export async function getCampaignByChainId(db: DbClient, chainCampaignId: number
     .single();
 
   return unwrap(result, 'Campaign not found');
+}
+
+export async function listCampaigns(db: DbClient) {
+  const result = await db.from<never, Campaign>('campaigns').select('*').order('created_at', { ascending: false });
+  return unwrapList(result);
+}
+
+export async function listCampaignsByOwner(db: DbClient, ownerAddress: string) {
+  const result = await db
+    .from<never, Campaign>('campaigns')
+    .select('*')
+    .eq('owner_address', ownerAddress)
+    .order('created_at', { ascending: false });
+
+  return unwrapList(result);
+}
+
+export async function updateCampaignChainData(
+  db: DbClient,
+  id: string,
+  input: Pick<CampaignInsert, 'chain_campaign_id' | 'metadata_uri' | 'create_tx_hash'>,
+) {
+  const result = await db.from<never, Campaign>('campaigns').update(input).eq('id', id).select().single();
+  return unwrap(result, 'Campaign was not updated');
+}
+
+export async function updateCampaignTrustScore(db: DbClient, id: string, latestTrustScore: number) {
+  const result = await db
+    .from<never, Campaign>('campaigns')
+    .update({ latest_trust_score: latestTrustScore })
+    .eq('id', id)
+    .select()
+    .single();
+
+  return unwrap(result, 'Campaign trust score was not updated');
 }

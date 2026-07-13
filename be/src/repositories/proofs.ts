@@ -1,5 +1,5 @@
 import { type ImpactReport } from '../services/ai-impact-report';
-import { type DbClient, unwrap } from './types';
+import { type DbClient, unwrap, unwrapList } from './types';
 
 export type ProofInsert = {
   campaign_id: string;
@@ -29,6 +29,43 @@ export type Proof = ProofInsert & {
 export async function createProof(db: DbClient, input: ProofInsert) {
   const result = await db.from<ProofInsert, Proof>('proofs').insert(input).select().single();
   return unwrap(result, 'Proof was not created');
+}
+
+export async function getProofById(db: DbClient, id: string) {
+  const result = await db.from<never, Proof>('proofs').select('*').eq('id', id).single();
+  return unwrap(result, 'Proof not found');
+}
+
+export async function listProofsByCampaign(db: DbClient, campaignId: string) {
+  const result = await db
+    .from<never, Proof>('proofs')
+    .select('*')
+    .eq('campaign_id', campaignId)
+    .order('created_at', { ascending: false });
+
+  return unwrapList(result);
+}
+
+export async function updateProofImpactReport(db: DbClient, proofId: string, report: ImpactReport) {
+  const result = await db
+    .from<never, Proof>('proofs')
+    .update(mapImpactReportToProofUpdate(report))
+    .eq('id', proofId)
+    .select()
+    .single();
+
+  return unwrap(result, 'Proof AI report was not updated');
+}
+
+export async function markProofAiFailed(db: DbClient, proofId: string) {
+  const result = await db
+    .from<never, Proof>('proofs')
+    .update({ ai_status: 'failed' })
+    .eq('id', proofId)
+    .select()
+    .single();
+
+  return unwrap(result, 'Proof AI status was not updated');
 }
 
 export function mapImpactReportToProofUpdate(report: ImpactReport) {

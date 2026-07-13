@@ -1,6 +1,8 @@
 import { type ImpactReportInput } from '../services/ai-impact-report';
 import { type CertificatePayload, type CertificateType } from '../services/certificate';
 import { type UploadCandidate } from '../services/storage';
+import { type CampaignInsert } from '../repositories/campaigns';
+import { type ProofInsert } from '../repositories/proofs';
 import { requireOptionalString, requirePositiveNumberString, requireString } from './http';
 import { assertWalletAddress } from './validate';
 
@@ -55,6 +57,53 @@ export function parseSignedUploadRequest(body: unknown): { kind: 'campaign-cover
       name: requireString(input.fileName, 'fileName'),
       type: requireString(input.contentType, 'contentType'),
       size: Number(requirePositiveNumberString(input.size, 'size')),
+    },
+  };
+}
+
+export function parseCreateCampaignRequest(body: unknown): CampaignInsert {
+  const input = asRecord(body);
+  const ownerAddress = requireString(input.ownerAddress, 'ownerAddress');
+  assertWalletAddress(ownerAddress);
+
+  const category = requireString(input.category, 'category') as CampaignInsert['category'];
+  if (!['education', 'health', 'disaster', 'community', 'environment'].includes(category)) {
+    throw new Error('category is unsupported');
+  }
+
+  return {
+    owner_address: ownerAddress,
+    title: requireString(input.title, 'title'),
+    short_description: requireString(input.shortDescription, 'shortDescription'),
+    long_description: requireString(input.longDescription, 'longDescription'),
+    category,
+    target_amount: requirePositiveNumberString(input.targetAmount, 'targetAmount'),
+    cover_image_url: requireString(input.coverImageUrl, 'coverImageUrl'),
+    beneficiary_name: requireString(input.beneficiaryName, 'beneficiaryName'),
+    location: requireString(input.location, 'location'),
+    expected_impact: requireString(input.expectedImpact, 'expectedImpact'),
+    metadata_uri: requireOptionalString(input.metadataUri, 'metadataUri'),
+    create_tx_hash: requireOptionalString(input.createTxHash, 'createTxHash'),
+  };
+}
+
+export function parseCreateProofRequest(body: unknown): { ownerAddress: string; proof: ProofInsert } {
+  const input = asRecord(body);
+  const ownerAddress = requireString(input.ownerAddress, 'ownerAddress');
+  assertWalletAddress(ownerAddress);
+
+  return {
+    ownerAddress,
+    proof: {
+      campaign_id: requireString(input.campaignId, 'campaignId'),
+      title: requireString(input.title, 'title'),
+      description: requireString(input.description, 'description'),
+      amount_used: requirePositiveNumberString(input.amountUsed, 'amountUsed'),
+      impact_claim: requireString(input.impactClaim, 'impactClaim'),
+      file_url: requireString(input.fileUrl, 'fileUrl'),
+      file_hash: requireString(input.fileHash, 'fileHash'),
+      proof_uri: requireOptionalString(input.proofUri, 'proofUri'),
+      submit_tx_hash: requireOptionalString(input.submitTxHash, 'submitTxHash'),
     },
   };
 }
