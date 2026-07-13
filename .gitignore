@@ -1,0 +1,39 @@
+# dependencies
+node_modules/
+
+# builds
+.next/
+dist/
+build/
+coverage/
+out/
+
+# env and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS and editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# blockchain tooling
+cache/
+artifacts/
+typechain-types/
+broadcast/
+
+# local platform state
+.vercel/
+.supabase/
