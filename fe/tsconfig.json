@@ -16,7 +16,9 @@
     "plugins": [{ "name": "next" }],
     "paths": {
       "@/*": ["./*"],
-      "@aidnara/be": ["../be/src/index"]
+      "@aidnara/be": ["../be/src/index"],
+      "@supabase/supabase-js": ["./node_modules/@supabase/supabase-js"],
+      "ethers": ["./node_modules/ethers"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
