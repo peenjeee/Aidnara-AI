@@ -1,0 +1,7 @@
+.env
+.git
+.gitignore
+README.md
+api-test.http
+docker-compose.yml
+uploads

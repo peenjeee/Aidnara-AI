@@ -1,0 +1,60 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: aidnara_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: pnj123
+      POSTGRES_DB: aidnara
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - aidnara-network
+
+  backend:
+    build:
+      context: ./be
+    container_name: aidnara_backend
+    restart: always
+    environment:
+      DATABASE_URL: "postgres://postgres:pnj123@db:5432/aidnara?sslmode=disable"
+    depends_on:
+      - db
+    networks:
+      - aidnara-network
+
+  frontend:
+    build:
+      context: ./fe
+    container_name: aidnara_frontend
+    restart: always
+    environment:
+      VITE_API_URL: "/api" # Calls will go to the same origin (Nginx) -> /api
+    depends_on:
+      - backend
+    networks:
+      - aidnara-network
+
+  proxy:
+    image: nginx:alpine
+    container_name: aidnara_nginx
+    restart: always
+    ports:
+      - "3002:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - aidnara-network
+
+volumes:
+  pgdata:
+
+networks:
+  aidnara-network:
+    driver: bridge
