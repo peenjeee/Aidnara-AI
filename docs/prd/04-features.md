@@ -134,3 +134,6 @@ After at least one proof has an AI report.
 - Dashboard works for public users without wallet connection.
 - Dashboard does not expose secret environment values.
 - Data labels distinguish on-chain data and AI-generated analysis.
+
+---
+*Updated for Go/SolidStart architecture.*

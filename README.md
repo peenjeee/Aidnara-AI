@@ -1,12 +1,24 @@
 # Aidnara AI
 
 <div align="center">
-  <img src="docs/logo/aidnara_ai_logo.png" alt="Aidnara AI logo" width="160" />
+  <img src="https://raw.githubusercontent.com/RamsNotes31/Aidnara-AI/main/docs/logo/aidnara_ai_logo.png" alt="Aidnara AI logo" width="160" />
 </div>
 
 **Transparent Aid, Verified Impact**
 
-Aidnara AI is a transparent donation platform on **BNB Smart Chain** that helps donors track fund usage, view AI-generated impact reports, and verify certificate of impact records on-chain.
+Aidnara AI builds transparent donation tools powered by **BNB Smart Chain** and AI-assisted impact verification.
+
+<div align="center">
+  <img src="https://skillicons.dev/icons?i=ts,go,solidjs,tailwind,postgres,solidity&theme=dark" alt="Aidnara AI tech stack icons" />
+  <br />
+  <br />
+  <img src="https://img.shields.io/badge/BNB%20Smart%20Chain-F3BA2F?style=for-the-badge&logo=binance&logoColor=black" alt="BNB Smart Chain" />
+  <img src="https://img.shields.io/badge/Hardhat-FFF100?style=for-the-badge&logo=ethereum&logoColor=111111" alt="Hardhat" />
+  <img src="https://img.shields.io/badge/ethers.js-2535A0?style=for-the-badge&logo=ethereum&logoColor=white" alt="ethers.js" />
+  <img src="https://img.shields.io/badge/SolidJS-2C4F7C?style=for-the-badge&logo=solid&logoColor=white" alt="SolidJS" />
+  <img src="https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white" alt="Go" />
+  <img src="https://img.shields.io/badge/BscScan-121D33?style=for-the-badge&logo=binance&logoColor=F3BA2F" alt="BscScan" />
+</div>
 
 ## Meaning
 
@@ -49,116 +61,16 @@ Aidnara AI provides one public flow:
 - QR-based certificate verification
 - Automated PRD, deployment, testing, and security checks
 
-## Blockchain
-
-MVP chain:
-
-- Network: **BNB Smart Chain Testnet**
-- Chain ID: `97`
-- Native token: `tBNB`
-- Explorer: `https://testnet.bscscan.com`
-
-Production target:
-
-- Network: **BNB Smart Chain Mainnet**
-- Chain ID: `56`
-- Native token: `BNB`
-- Explorer: `https://bscscan.com`
-
-## AI Role
-
-AI is used as an assistive reviewer, not as a legal auditor.
-
-AI helps with:
-
-- reading uploaded proof images or receipts
-- summarizing fund usage
-- checking consistency between claim and proof
-- generating impact summaries
-- assigning simple risk and trust score labels
-- creating certificate impact wording
-
-## Certificate System
-
-Aidnara AI generates two certificate types:
-
-- **Donor Certificate**: issued after a confirmed donation.
-- **Organizer Certificate**: issued after proof upload and AI impact report generation.
-
-Each certificate includes:
-
-- campaign reference
-- recipient wallet
-- transaction or proof reference
-- certificate hash
-- QR verification link
-- on-chain verification status
-
 ## Repository Structure
 
 ```text
-fe/           Frontend app and UI implementation
-be/           Backend services and server-only logic
+fe/           Frontend app (SolidStart + Tailwind)
+be/           Backend services (Go + Fiber + PostgreSQL)
 api/          API contract and endpoint specifications
 blockchain/   Smart contracts, deployment scripts, and contract tests
 docs/prd/     Product requirements documents
 scripts/      Local verification and security checks
 ```
-
-## Suggested Tech Stack
-
-<div align="center">
-  <img src="https://skillicons.dev/icons?i=ts,nextjs,tailwind,nodejs,postgres,supabase,solidity,ethereum,vercel&theme=dark" alt="Aidnara AI tech stack icons" />
-  <br />
-  <br />
-  <img src="https://img.shields.io/badge/BNB%20Smart%20Chain-F3BA2F?style=for-the-badge&logo=binance&logoColor=black" alt="BNB Smart Chain" />
-  <img src="https://img.shields.io/badge/Hardhat-FFF100?style=for-the-badge&logo=ethereum&logoColor=111111" alt="Hardhat" />
-  <img src="https://img.shields.io/badge/ethers.js-2535A0?style=for-the-badge&logo=ethereum&logoColor=white" alt="ethers.js" />
-  <img src="https://img.shields.io/badge/viem-111111?style=for-the-badge&logo=ethereum&logoColor=white" alt="viem" />
-  <img src="https://img.shields.io/badge/wagmi-000000?style=for-the-badge&logo=walletconnect&logoColor=white" alt="wagmi" />
-  <img src="https://img.shields.io/badge/RainbowKit-0E76FD?style=for-the-badge&logo=walletconnect&logoColor=white" alt="RainbowKit" />
-  <img src="https://img.shields.io/badge/BscScan-121D33?style=for-the-badge&logo=binance&logoColor=F3BA2F" alt="BscScan" />
-</div>
-
-### Stack Breakdown
-
-Frontend:
-
-- Next.js
-- TypeScript
-- Tailwind CSS
-- shadcn/ui
-- wagmi
-- RainbowKit
-- viem
-
-Backend:
-
-- Next.js route handlers or Node.js service
-- Supabase Postgres
-- Supabase Storage
-- Gemini Vision or OpenAI Vision
-
-Blockchain:
-
-- Solidity
-- Hardhat
-- ethers.js
-- BNB Smart Chain Testnet
-- BscScan Testnet
-
-Web3 frontend:
-
-- wagmi
-- viem
-- RainbowKit
-- WalletConnect-compatible wallet flow
-
-Deployment:
-
-- Vercel
-- Supabase
-- BscScan Testnet
 
 ## PRD Documents
 
@@ -220,5 +132,6 @@ The check validates:
 ## Status
 
 Current repository status: PRD, backend baseline, blockchain contract, and Hardhat test suite prepared. Frontend scaffold and API runtime are next.
+Built with Go and SolidStart.
 
 © 2026 Aidnara AI. All rights reserved.

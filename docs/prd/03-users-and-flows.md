@@ -135,3 +135,6 @@ Permissions:
 - AI generation failed.
 - Certificate hash not found.
 - Contract read failed.
+
+---
+*Updated for Go/SolidStart architecture.*

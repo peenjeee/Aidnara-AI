@@ -1,0 +1,36 @@
+### 1. Test Health Endpoint
+GET http://localhost:8080/api/health
+Accept: application/json
+
+### 2. List All Campaigns
+GET http://localhost:8080/api/campaigns
+Accept: application/json
+
+### 3. Create a New Campaign
+POST http://localhost:8080/api/campaigns
+Content-Type: application/json
+
+{
+  "chain_campaign_id": 1,
+  "owner_address": "0x1234567890abcdef1234567890abcdef12345678",
+  "title": "Bantu Sekolah Pelosok",
+  "short_description": "Donasi untuk sekolah rusak",
+  "long_description": "Sekolah ini rusak sejak tahun lalu dan butuh dana untuk atap.",
+  "category": "education",
+  "target_amount": 500.5,
+  "cover_image_url": "https://example.com/image.jpg",
+  "beneficiary_name": "SDN 1 Pelosok",
+  "location": "Desa Terpencil, Indonesia",
+  "expected_impact": "100 siswa bisa kembali belajar dengan nyaman"
+}
+
+### 4. Create a Donation
+POST http://localhost:8080/api/donations
+Content-Type: application/json
+
+{
+  "campaign_id": "REPLACE_WITH_UUID_FROM_ABOVE",
+  "donor_address": "0xABCDEF1234567890ABCDEF1234567890ABCDEF12",
+  "amount": 10.5,
+  "tx_hash": "0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
+}

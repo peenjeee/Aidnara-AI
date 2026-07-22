@@ -44,7 +44,7 @@
 
 ## Database Security
 
-- Enable Row Level Security when Supabase tables are connected to client writes.
+- Validate wallet ownership on backend APIs and database queries.
 - Server-only writes are preferred for proofs, AI reports, and certificates.
 - Validate ownership on server before inserting proof or certificate records.
 - Do not expose service role key to browser bundles.

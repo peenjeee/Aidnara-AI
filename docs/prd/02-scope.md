@@ -19,7 +19,7 @@ MVP Aidnara AI fokus pada satu alur: create campaign, donate, upload proof, gene
 - Donor certificate otomatis setelah donasi confirmed.
 - Organizer certificate setelah minimal satu proof dan AI report tersedia.
 - Certificate verification page berbasis QR/hash.
-- Storage file off-chain melalui Supabase Storage atau Pinata IPFS.
+- Storage file off-chain melalui Local VPS Storage atau Pinata IPFS.
 - Deployment ke Vercel.
 - Automated PRD, testing, dan security checks via `scripts/verify-mvp.js`.
 
@@ -61,7 +61,7 @@ P2 nice to have:
 - Share certificate button.
 - Category badges.
 - Basic organizer profile.
-- IPFS mirror in addition to Supabase Storage.
+- IPFS mirror in addition to Local VPS Storage.
 
 ## Success Criteria
 

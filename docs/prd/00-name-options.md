@@ -69,3 +69,6 @@ Reason:
 - Instagram, X, TikTok, and LinkedIn handles.
 - Google search exact match.
 - Product Hunt and app store search.
+
+---
+*Updated for Go/SolidStart architecture.*

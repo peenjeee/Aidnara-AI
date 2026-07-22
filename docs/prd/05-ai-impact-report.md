@@ -99,3 +99,6 @@ Use one provider only for MVP. Do not add provider abstraction until needed.
 Show disclaimer near report:
 
 `AI analysis is an assistive review based on uploaded proof. Final accountability remains with the campaign organizer.`
+
+---
+*Updated for Go/SolidStart architecture.*

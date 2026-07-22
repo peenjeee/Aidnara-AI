@@ -1,20 +1,34 @@
 # API
 
-API contract and endpoint specifications for Aidnara AI.
+API contract and endpoint specifications for the new Aidnara AI Go Backend.
 
 ## Responsibility
 
 - Define request and response shapes.
-- Document route behavior.
-- Keep AI, certificate, storage, and verification API contracts stable.
+- Document route behavior for Campaigns, Donations, Proofs, and Certificates.
+- Outline integration points for Web3, AI, and Storage.
 
-## MVP Endpoints
+## Go Backend Endpoints
 
-- `POST /api/ai/impact-report`
-- `POST /api/certificates/generate`
-- `GET /api/certificates/[hash]`
-- `POST /api/storage/signed-upload`
+### Campaigns
+- `GET /api/campaigns`
+- `POST /api/campaigns`
+- `GET /api/campaigns/:id`
+- `GET /api/campaigns/:id/donations`
+
+### Donations
+- `POST /api/donations`
+
+### Proofs & AI Impact Report
+- `POST /api/proofs` (Triggers asynchronous Gemini AI evaluation)
+
+### Certificates
+- `POST /api/certificates`
+- `POST /api/certificates/:id/issue`
+
+### System
+- `GET /api/health`
 
 ## Rule
 
-API specs live here. Runtime server code can live in `be/` or inside the frontend framework when using Next.js route handlers.
+API specs live here. Runtime server code lives in `be/handlers/` using the Fiber framework.

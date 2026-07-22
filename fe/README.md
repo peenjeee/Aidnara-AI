@@ -1,55 +1,42 @@
-# FE
+# Aidnara AI - Frontend
 
-Frontend app for Aidnara AI.
+This is the frontend application for the Aidnara AI project, built to provide a fast and responsive user interface for donation tracking, campaign management, and verifiable impact certificates.
 
-## Responsibility
+## Tech Stack
+* Framework: SolidStart (SolidJS)
+* Styling: Tailwind CSS
+* Language: TypeScript
+* Package Manager: npm
 
-- Landing page.
-- Campaign list and detail pages.
-- Wallet connection UI.
-- Donation UI.
-- Proof upload UI.
-- AI impact report display.
-- Certificate display and verification pages.
+## Prerequisites
+* Node.js (v18 or newer)
+* npm
 
-## Suggested Stack
+## Getting Started
 
-- Next.js
-- TypeScript
-- Tailwind CSS
-- shadcn/ui
-- wagmi
-- RainbowKit
-- viem
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-Wallet dependencies are documented here but intentionally not installed until wallet UI starts.
+2. Environment Setup:
+   Copy the example environment file and configure the necessary variables.
+   ```bash
+   cp .env.example .env
+   ```
+   Update `.env` with your backend API URL and Web3 configuration.
 
-## Pages
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-- `/`
-- `/campaigns`
-- `/campaigns/create`
-- `/campaigns/[id]`
-- `/campaigns/[id]/proofs/create`
-- `/certificates/[id]`
-- `/verify/certificate/[hash]`
+4. Build for production:
+   ```bash
+   npm run build
+   ```
 
-## API Routes
-
-- `/api/campaigns`
-- `/api/campaigns/[id]`
-- `/api/campaigns/[id]/donations`
-- `/api/campaigns/[id]/proofs`
-- `/api/donations`
-- `/api/proofs`
-- `/api/ai/impact-report`
-- `/api/certificates/generate`
-- `/api/certificates/[hash]`
-- `/api/storage/signed-upload`
-
-## Check
-
-```bash
-npm run check
-npm run typecheck
-```
+## Project Structure
+* `src/routes/` - Contains the file-based routing components (Homepage, Campaigns, etc).
+* `src/app.tsx` - The main entry point configuring SolidStart Router.
+* `src/app.css` - Global stylesheet including Tailwind directives and CSS variables.

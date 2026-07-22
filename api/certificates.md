@@ -1,61 +1,35 @@
 # Certificates API
 
-## POST /api/certificates/generate
+## POST /api/certificates
 
-Generates certificate payload, hash, and verification path.
+Registers a new certificate record linking a campaign, a donation, and a proof.
 
 ### Request
 
 ```json
 {
-  "type": "donor",
-  "campaignId": "campaign-uuid",
-  "campaignTitle": "Bantu Anak Desa Belajar Online",
-  "recipientAddress": "0x0000000000000000000000000000000000000000",
-  "amount": "0.01",
-  "referenceTxHash": "0xtransactionhash",
-  "impactText": "Kontribusi ini mendukung akses belajar online untuk sekitar 15 siswa."
+  "campaign_id": "uuid-string",
+  "donation_id": "uuid-string",
+  "proof_id": "uuid-string",
+  "recipient_address": "0x0000000000000000000000000000000000000000",
+  "certificate_type": "donor",
+  "certificate_hash": "0xhash"
 }
 ```
 
-### Response
+## POST /api/certificates/:id/issue
+
+Updates the on-chain issuance transaction hash for an existing certificate.
+
+### Request
 
 ```json
 {
-  "payload": {
-    "type": "donor",
-    "campaignId": "campaign-uuid",
-    "campaignTitle": "Bantu Anak Desa Belajar Online",
-    "recipientAddress": "0x0000000000000000000000000000000000000000",
-    "amount": "0.01",
-    "referenceTxHash": "0xtransactionhash",
-    "impactText": "Kontribusi ini mendukung akses belajar online untuk sekitar 15 siswa.",
-    "issuedAt": "2026-07-13T00:00:00.000Z"
-  },
-  "certificateHash": "0xhash",
-  "verificationPath": "/verify/certificate/0xhash"
-}
-```
-
-## GET /api/certificates/[hash]
-
-Looks up certificate verification status by hash.
-
-### Response
-
-```json
-{
-  "status": "VALID",
-  "certificateHash": "0xhash",
-  "certificateType": "donor",
-  "recipientAddress": "0x0000000000000000000000000000000000000000",
-  "campaignTitle": "Bantu Anak Desa Belajar Online",
-  "issuedAt": "2026-07-13T00:00:00.000Z"
+  "tx_hash": "0xhashofissuance"
 }
 ```
 
 ## Rules
 
-- Unknown hash returns `NOT_FOUND`.
-- Certificate hash must be generated from final stable certificate payload.
-- Contract registration happens after payload/hash generation.
+- Certificate records must match existing campaigns, donations, and proofs in the PostgreSQL database.
+- Smart Contract verification ensures the actual issuance exists on-chain before the `tx_hash` is updated.

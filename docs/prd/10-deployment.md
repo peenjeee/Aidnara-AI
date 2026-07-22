@@ -12,47 +12,48 @@ Deploy a stable public demo where judges can open the app, inspect campaign tran
 
 ## Required Services
 
-- Vercel for app hosting.
-- Supabase for database and storage.
+- VPS (Ubuntu/Linux) for Go Backend and PostgreSQL Database.
+- Vercel or similar for SolidStart Frontend hosting.
 - BNB Smart Chain Testnet for smart contract.
-- Gemini/OpenAI for AI vision analysis.
+- Gemini API for AI vision analysis.
 - Block explorer for public transaction links.
 
 ## Deployment Units
 
-- `fe/`: deployed to Vercel as the public web app.
-- `be/`: deployed as Vercel server routes, serverless functions, or a separate Node service if needed.
+- `fe/`: deployed to Vercel (or static hosting) as the public web app.
+- `be/`: deployed to a VPS as a long-running Go application.
 - `api/`: documentation/spec source, not deployed as runtime by default.
 - `blockchain/`: deployed to selected testnet before frontend production demo.
 
 ## Required Environment Variables
 
+Backend (`be/.env`):
 ```text
-NEXT_PUBLIC_CHAIN_ID=
-NEXT_PUBLIC_RPC_URL=
-NEXT_PUBLIC_CONTRACT_ADDRESS=
-NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
-SUPABASE_SERVICE_ROLE_KEY=
-AI_API_KEY=
-PINATA_JWT=
+PORT=3000
+DATABASE_URL=
+GEMINI_API_KEY=
+RPC_URL=
+CONTRACT_ADDRESS=
+```
+
+Frontend (`fe/.env`):
+```text
+VITE_API_URL=
+VITE_CHAIN_ID=
+VITE_CONTRACT_ADDRESS=
 ```
 
 ## Deployment Steps
 
 1. Deploy `blockchain/` smart contract to BNB Smart Chain Testnet.
 2. Verify contract address and explorer URL.
-3. Save contract address, ABI, and chain ID for `fe/` and `be/`.
-4. Create Supabase tables.
-5. Create Supabase Storage buckets for campaign covers, proofs, and certificates.
-6. Configure RLS or server-only writes for `be/`.
-7. Configure environment variables in Vercel.
-8. Run `node scripts/verify-mvp.js`.
-9. Deploy `fe/` app to Vercel preview with backend routes enabled.
-10. Run full manual demo flow on preview URL.
-11. Fix preview issues.
-12. Promote to production.
-13. Run smoke test on production URL.
+3. Prepare the VPS: install PostgreSQL, setup database schema (`db/schema.sql`).
+4. Build the Go Backend: `go build` and run as a service (e.g. via `systemd`).
+5. Configure environment variables for the Go Backend.
+6. Deploy `fe/` app to Vercel or VPS.
+7. Configure `VITE_API_URL` environment variables in Frontend hosting to point to the VPS Backend.
+8. Run full manual demo flow on production URL.
+9. Run smoke test on production URL.
 
 ## Production Smoke Test
 

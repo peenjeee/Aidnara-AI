@@ -4,10 +4,9 @@
 
 Frontend:
 
-- Next.js
+- SolidStart (SolidJS)
 - TypeScript
 - Tailwind CSS
-- shadcn/ui
 
 Web3 frontend:
 
@@ -18,10 +17,11 @@ Web3 frontend:
 
 Backend:
 
-- Next.js API routes or route handlers
-- Supabase Postgres
-- Supabase Storage for MVP
-- Gemini Vision or OpenAI Vision
+- Go (Golang)
+- Fiber Framework
+- PostgreSQL (via sqlc)
+- Local File Storage (VPS)
+- Gemini AI
 
 Blockchain:
 
@@ -40,7 +40,7 @@ Web3 and blockchain logo sources:
 Deployment:
 
 - Vercel
-- Supabase
+- VPS / Local DB
 - Block explorer for testnet verification
 
 ## System Components
@@ -54,8 +54,8 @@ Deployment:
 ## Repository Structure
 
 ```text
-fe/          Frontend app and UI implementation.
-be/          Backend service code, database access, storage orchestration, server-only logic.
+fe/          Frontend app and UI implementation (SolidStart).
+be/          Backend service code (Go, Fiber, Postgres, Local Storage).
 api/         API contracts, endpoint specs, request/response schemas.
 blockchain/  Solidity contracts, deployment scripts, and contract tests.
 docs/prd/    Product requirements and implementation constraints.
@@ -181,10 +181,11 @@ FundsWithdrawn(uint256 indexed campaignId, address indexed owner, uint256 amount
 
 ## API Routes
 
-- `POST /api/ai/impact-report`
-- `POST /api/certificates/generate`
-- `GET /api/certificates/[hash]`
-- `POST /api/storage/signed-upload` if direct upload is needed.
+- `GET /api/campaigns`
+- `POST /api/campaigns`
+- `POST /api/donations`
+- `POST /api/proofs`
+- `POST /api/certificates`
 
 API route contracts must be documented under `api/` before implementation.
 

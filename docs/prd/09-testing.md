@@ -95,4 +95,7 @@ The automated check must validate these folders exist:
 - AI API key works.
 - Storage upload works.
 - Certificate QR opens on mobile.
-- Vercel preview URL can complete full flow.
+- VPS production URL can complete full flow.
+
+---
+*Updated for Go/SolidStart architecture.*

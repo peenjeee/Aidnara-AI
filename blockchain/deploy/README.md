@@ -3,20 +3,20 @@
 ## Target Network
 
 - Network: BNB Smart Chain Testnet
-- Chain ID: `97`
-- Token: `tBNB`
-- Explorer: `https://testnet.bscscan.com`
+- Chain ID: 97
+- Token: tBNB
+- Explorer: https://testnet.bscscan.com
 
 Temporary fallback network:
 
 - Network: Polygon Amoy
-- Chain ID: `80002`
-- Token: `POL`
-- Explorer: `https://amoy.polygonscan.com`
+- Chain ID: 80002
+- Token: POL
+- Explorer: https://amoy.polygonscan.com
 
 ## Contract
 
-- `contracts/AidnaraAidRegistry.sol`
+- contracts/AidnaraAidRegistry.sol
 
 ## Required Environment Variables
 
@@ -37,14 +37,15 @@ POLYGONSCAN_API_KEY=
 
 ## Frontend/Backend Env Updates
 
+For BNB Testnet:
 ```text
-NEXT_PUBLIC_CHAIN_ID=97
-NEXT_PUBLIC_CONTRACT_ADDRESS=<deployed-contract-address>
+VITE_CHAIN_ID=97
+VITE_CONTRACT_ADDRESS=<deployed-contract-address>
 ```
 
 For Polygon Amoy fallback:
 
 ```text
-NEXT_PUBLIC_CHAIN_ID=80002
-NEXT_PUBLIC_CONTRACT_ADDRESS=<deployed-contract-address>
+VITE_CHAIN_ID=80002
+VITE_CONTRACT_ADDRESS=<deployed-contract-address>
 ```

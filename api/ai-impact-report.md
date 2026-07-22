@@ -1,41 +1,32 @@
-# POST /api/ai/impact-report
+# POST /api/proofs
 
-Generates an AI-assisted impact report from campaign context and proof evidence.
+Creates a new proof for a campaign and triggers an asynchronous AI-assisted impact report evaluation using Google Gemini.
 
 ## Request
 
 ```json
 {
-  "campaignTitle": "Bantu Anak Desa Belajar Online",
-  "campaignCategory": "education",
-  "campaignDescription": "Campaign description",
-  "expectedImpact": "Membantu 15 siswa mendapatkan akses belajar online.",
-  "proofTitle": "Pembelian perangkat belajar",
-  "proofDescription": "Nota dan foto perangkat",
-  "amountUsed": "0.03",
-  "impactClaim": "Dana digunakan untuk membeli 3 laptop dan 1 router.",
-  "proofFileUrl": "https://storage.example/proof.png"
+  "campaign_id": "uuid-string",
+  "title": "Pembelian perangkat belajar",
+  "description": "Nota dan foto perangkat",
+  "amount_used": "0.03",
+  "impact_claim": "Dana digunakan untuk membeli 3 laptop dan 1 router.",
+  "file_url": "/uploads/proofs/123-receipt.png",
+  "file_hash": "0xhashofimage"
 }
 ```
 
-## Response
+## Background Processing (AI Evaluation)
 
-```json
-{
-  "summary": "Bukti menunjukkan pembelian perangkat belajar berupa laptop dan router.",
-  "detectedItems": ["laptop", "router", "receipt"],
-  "consistency": "Bukti cukup konsisten dengan klaim penggunaan dana.",
-  "risk": "Low",
-  "estimatedImpact": "Sekitar 15 siswa dapat terbantu akses belajar online.",
-  "trustScore": 87,
-  "certificateImpactText": "Kontribusi ini mendukung akses belajar online untuk sekitar 15 siswa.",
-  "warnings": []
-}
-```
+After creation, the backend triggers a goroutine to evaluate the proof using Gemini 1.5 Flash. It assesses the text claim and updates the database record with:
+- `ai_summary`
+- `ai_consistency`
+- `ai_risk`
+- `ai_estimated_impact`
+- `ai_trust_score`
 
 ## Rules
 
-- Return structured JSON only.
-- Risk must be `Low`, `Medium`, or `High`.
-- Trust score must be integer `0-100`.
-- AI output is assistive analysis, not legal audit.
+- Returns a `201 Created` with the initial database record immediately.
+- AI evaluation happens in the background to prevent blocking the user interface.
+- Errors during AI generation log to the server but do not fail the initial creation request.

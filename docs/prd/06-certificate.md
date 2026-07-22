@@ -96,3 +96,6 @@ Pick the simplest implementation that works for demo.
 - Batch certificate generation.
 - Certificate revocation UI.
 - Custom certificate template editor.
+
+---
+*Updated for Go/SolidStart architecture.*

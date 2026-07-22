@@ -77,3 +77,6 @@ Satu demo end-to-end harus berhasil:
 - UI harus bisa dipahami dalam 30 detik.
 - MVP harus bisa dijalankan di BNB Smart Chain Testnet tanpa dependency mahal.
 - Fitur yang tidak mendukung demo utama ditunda.
+
+---
+*Updated for Go/SolidStart architecture.*
