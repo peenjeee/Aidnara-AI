@@ -18,6 +18,7 @@ jobs:
           password: ${{ secrets.VPS_PASSWORD }}
           script: |
             cd /var/www/Aidnara-AI
-            git pull origin main
-            docker compose up --build -d
-            docker system prune -f
+            sudo git config --global --add safe.directory /var/www/Aidnara-AI
+            sudo git pull origin main
+            sudo docker compose up --build -d
+            sudo docker system prune -f
