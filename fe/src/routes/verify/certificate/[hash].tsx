@@ -53,10 +53,18 @@ export default function VerifyCertificatePage() {
             <code class="break-all text-white">{certificate()!.certificate_hash}</code>
             <p class="text-muted">Recipient: {certificate()!.recipient_address}</p>
             <p class="text-muted">Campaign: {certificate()!.campaign_id}</p>
-            {certificate()!.issue_tx_hash && <p class="text-muted">Tx: {certificate()!.issue_tx_hash}</p>}
+            {certificate()!.issue_tx_hash && (
+              <a class="break-all text-cyan-300 underline" href={explorerTxUrl(certificate()!.issue_tx_hash!)} target="_blank">
+                View transaction on BscScan: {certificate()!.issue_tx_hash}
+              </a>
+            )}
           </div>
         )}
       </section>
     </main>
   );
+}
+
+function explorerTxUrl(txHash: string) {
+  return `https://testnet.bscscan.com/tx/${txHash}`;
 }
