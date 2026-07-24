@@ -363,6 +363,52 @@ func (q *Queries) GetProof(ctx context.Context, id pgtype.UUID) (Proof, error) {
 	return i, err
 }
 
+const getProofsByCampaign = `-- name: GetProofsByCampaign :many
+SELECT id, campaign_id, title, description, amount_used, impact_claim, file_url, file_hash, proof_uri, submit_tx_hash, ai_status, ai_summary, ai_detected_items, ai_consistency, ai_risk, ai_estimated_impact, ai_trust_score, ai_certificate_impact_text, created_at FROM proofs
+WHERE campaign_id = $1
+ORDER BY created_at DESC
+`
+
+func (q *Queries) GetProofsByCampaign(ctx context.Context, campaignID pgtype.UUID) ([]Proof, error) {
+	rows, err := q.db.Query(ctx, getProofsByCampaign, campaignID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Proof
+	for rows.Next() {
+		var i Proof
+		if err := rows.Scan(
+			&i.ID,
+			&i.CampaignID,
+			&i.Title,
+			&i.Description,
+			&i.AmountUsed,
+			&i.ImpactClaim,
+			&i.FileUrl,
+			&i.FileHash,
+			&i.ProofUri,
+			&i.SubmitTxHash,
+			&i.AiStatus,
+			&i.AiSummary,
+			&i.AiDetectedItems,
+			&i.AiConsistency,
+			&i.AiRisk,
+			&i.AiEstimatedImpact,
+			&i.AiTrustScore,
+			&i.AiCertificateImpactText,
+			&i.CreatedAt,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const linkDonationCertificate = `-- name: LinkDonationCertificate :exec
 UPDATE donations
 SET certificate_id = $2

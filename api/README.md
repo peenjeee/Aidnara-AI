@@ -21,7 +21,7 @@ API contract and endpoint specifications for the new Aidnara AI Go Backend.
 
 ### Proofs & AI Impact Report
 - `POST /api/proofs` (Triggers asynchronous Gemini AI evaluation)
-- `GET /api/campaigns/:id/proofs` (planned)
+- `GET /api/campaigns/:id/proofs`
 
 ### Certificates
 - `POST /api/certificates`

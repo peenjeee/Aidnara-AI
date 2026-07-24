@@ -21,3 +21,12 @@ Creates proof metadata and triggers asynchronous Gemini evaluation.
 ## Response
 
 Returns created proof row with `ai_status` initially pending or incomplete depending on database defaults.
+
+## GET /api/campaigns/:id/proofs
+
+Returns proof timeline for one campaign.
+
+## Errors
+
+- Invalid campaign UUID returns `400`.
+- Query failure returns `500`.

@@ -26,6 +26,22 @@ func NewProofHandler(conn *pgx.Conn) *ProofHandler {
 	}
 }
 
+// GET /api/campaigns/:id/proofs
+func (h *ProofHandler) ListProofsByCampaign(c *fiber.Ctx) error {
+	idParam := c.Params("id")
+	campaignUUID, err := uuid.Parse(idParam)
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid Campaign ID"})
+	}
+
+	proofs, err := h.Queries.GetProofsByCampaign(c.Context(), pgtype.UUID{Bytes: campaignUUID, Valid: true})
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Failed to get proofs"})
+	}
+
+	return c.JSON(proofs)
+}
+
 // POST /api/proofs
 func (h *ProofHandler) CreateProof(c *fiber.Ctx) error {
 	type Request struct {

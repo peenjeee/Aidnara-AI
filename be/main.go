@@ -78,6 +78,7 @@ func main() {
 	api.Post("/campaigns", campaignHandler.CreateCampaign)
 	api.Get("/campaigns/:id", campaignHandler.GetCampaign)
 	api.Get("/campaigns/:id/donations", donationHandler.ListDonationsByCampaign)
+	api.Get("/campaigns/:id/proofs", proofHandler.ListProofsByCampaign)
 
 	// Routes - Donations
 	api.Post("/donations", donationHandler.CreateDonation)

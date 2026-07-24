@@ -44,6 +44,11 @@ WHERE id = $1;
 SELECT * FROM proofs
 WHERE id = $1 LIMIT 1;
 
+-- name: GetProofsByCampaign :many
+SELECT * FROM proofs
+WHERE campaign_id = $1
+ORDER BY created_at DESC;
+
 -- name: CreateProof :one
 INSERT INTO proofs (
   campaign_id, title, description, amount_used, impact_claim, file_url, file_hash

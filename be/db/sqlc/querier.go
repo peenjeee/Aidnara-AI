@@ -21,6 +21,7 @@ type Querier interface {
 	GetDonationByTxHash(ctx context.Context, txHash string) (Donation, error)
 	GetDonationsByCampaign(ctx context.Context, campaignID pgtype.UUID) ([]Donation, error)
 	GetProof(ctx context.Context, id pgtype.UUID) (Proof, error)
+	GetProofsByCampaign(ctx context.Context, campaignID pgtype.UUID) ([]Proof, error)
 	LinkDonationCertificate(ctx context.Context, arg LinkDonationCertificateParams) error
 	ListCampaigns(ctx context.Context) ([]Campaign, error)
 	UpdateCertificateTxHash(ctx context.Context, arg UpdateCertificateTxHashParams) error
