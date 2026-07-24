@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"os"
 
 	"aidnara-be/db/sqlc"
 	"aidnara-be/services"
@@ -90,10 +91,15 @@ func (h *ProofHandler) analyzeProofWithAI(proof db.Proof) {
 	// Call Gemini Provider
 	prompt := fmt.Sprintf("Analyze this proof for a campaign.\nTitle: %s\nDescription: %s\nClaim: %s\nEvaluate trust score (0-100), consistency, and risk.", proof.Title, proof.Description, proof.ImpactClaim)
 	
-	// Example key, in reality load from env
+	apiKey := os.Getenv("GEMINI_API_KEY")
+	if apiKey == "" {
+		fmt.Println("AI Provider skipped: GEMINI_API_KEY is not configured")
+		return
+	}
+
 	opts := services.GeminiOptions{
-		APIKey: "YOUR_GEMINI_API_KEY",
-		Model:  "gemini-1.5-flash",
+		APIKey: apiKey,
+		Model:  os.Getenv("GEMINI_MODEL"),
 	}
 
 	result, err := services.CallGeminiJSON(prompt, opts)

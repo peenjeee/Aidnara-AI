@@ -3,6 +3,7 @@ package handlers
 import (
 	"context"
 	"math/big"
+	"os"
 
 	"aidnara-be/db/sqlc"
 	"aidnara-be/services"
@@ -45,9 +46,12 @@ func (h *DonationHandler) CreateDonation(c *fiber.Ctx) error {
 	campaignPgUUID := pgtype.UUID{Bytes: campaignUUID, Valid: true}
 
 	// Verify the campaign exists
-	_, err = h.Queries.GetCampaign(c.Context(), campaignPgUUID)
+	campaign, err := h.Queries.GetCampaign(c.Context(), campaignPgUUID)
 	if err != nil {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "Campaign not found"})
+	}
+	if !campaign.ChainCampaignID.Valid {
+		return c.Status(fiber.StatusConflict).JSON(fiber.Map{"error": "Campaign is not linked on-chain"})
 	}
 
 	// Verify the transaction on-chain
@@ -56,21 +60,26 @@ func (h *DonationHandler) CreateDonation(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid amount format"})
 	}
 
+	rpcURL := os.Getenv("RPC_URL")
+	contractAddress := os.Getenv("CONTRACT_ADDRESS")
+	if rpcURL == "" || contractAddress == "" {
+		return c.Status(fiber.StatusServiceUnavailable).JSON(fiber.Map{"error": "On-chain validation is not configured"})
+	}
+
 	opts := services.OnchainValidationOptions{
-		RPCUrl:          "https://bsc-testnet.publicnode.com", // You might want to make this configurable
-		ContractAddress: "0xYOUR_CONTRACT_ADDRESS", // Provide real address via config later
+		RPCUrl:          rpcURL,
+		ContractAddress: contractAddress,
 	}
 	expect := services.DonationEventExpectation{
 		TxHash:       req.TxHash,
-		CampaignID:   big.NewInt(0), // Normally you'd get the exact chain_campaign_id from the DB record
+		CampaignID:   big.NewInt(campaign.ChainCampaignID.Int64),
 		DonorAddress: req.Donor,
 		Amount:       amountBigInt,
 	}
 
 	// Wait for chain verification
 	if err := services.ValidateDonationEvent(c.Context(), opts, expect); err != nil {
-		// Log error, but for development we might bypass strict check if needed
-		// return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": err.Error()})
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": err.Error()})
 	}
 
 	// Store in DB
