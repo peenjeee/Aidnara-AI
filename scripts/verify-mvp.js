@@ -69,7 +69,7 @@ const requiredTerms = [
   ['api/onchain-validation.md', ['DonationEventExpectation', 'Receipt', 'Event fields']],
   ['api/event-sync.md', ['Event sync persistence', 'DonationReceived', 'CertificateIssued']],
   ['fe/src/routes/campaigns.tsx', ['demoCampaigns', 'Campaign API unavailable', 'Start Campaign']],
-  ['fe/src/routes/campaigns/create.tsx', ['owner_address', 'POST', '/api/campaigns', 'Create Campaign']],
+  ['fe/src/routes/campaigns/create.tsx', ['owner_address', 'POST', '/api/uploads', '/api/campaigns', 'Create Campaign']],
   ['fe/src/routes/campaigns/[id].tsx', ['useParams', 'Campaign API unavailable', 'trust score', '/api/donations', '/api/uploads', '/api/proofs', 'SHA-256', '/api/certificates']],
   ['fe/src/routes/verify/certificate/[hash].tsx', ['Verify Certificate', '/api/certificates/hash/', 'demo-certificate-hash']],
   ['api/ai-impact-report.md', ['POST /api/proofs', 'trust_score']],

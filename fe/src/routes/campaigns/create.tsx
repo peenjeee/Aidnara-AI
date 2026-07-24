@@ -6,15 +6,29 @@ export default function CreateCampaignPage() {
   async function submitCampaign(event: SubmitEvent) {
     event.preventDefault();
     const form = event.currentTarget as HTMLFormElement;
-    const data = Object.fromEntries(new FormData(form).entries());
+    const formData = new FormData(form);
+    const cover = formData.get("cover_image");
 
-    setStatus("Creating campaign...");
+    if (!(cover instanceof File)) {
+      setStatus("Cover image is required.");
+      return;
+    }
+
+    setStatus("Uploading cover image...");
 
     try {
+      const upload = new FormData();
+      upload.set("kind", "campaign-cover");
+      upload.set("file", cover);
+
+      const uploadResponse = await fetch("/api/uploads", { method: "POST", body: upload });
+      if (!uploadResponse.ok) throw new Error("Cover upload failed");
+      const uploaded = await uploadResponse.json();
+
       const response = await fetch("/api/campaigns", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...Object.fromEntries(formData.entries()), cover_image_url: uploaded.path }),
       });
 
       if (!response.ok) throw new Error("Campaign API rejected the request");
@@ -68,8 +82,8 @@ export default function CreateCampaignPage() {
           <input class="rounded-xl border border-white/10 bg-bg p-3" name="target_amount" type="number" min="0.001" step="0.001" placeholder="0.05" required />
         </label>
         <label class="grid gap-2 font-bold">
-          Cover image URL
-          <input class="rounded-xl border border-white/10 bg-bg p-3" name="cover_image_url" type="url" placeholder="https://example.com/cover.png" required />
+          Cover image
+          <input class="rounded-xl border border-white/10 bg-bg p-3" name="cover_image" type="file" accept="image/*" required />
         </label>
         <label class="grid gap-2 font-bold">
           Beneficiary name
