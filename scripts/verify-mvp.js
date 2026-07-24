@@ -74,7 +74,7 @@ const requiredTerms = [
   ['fe/src/routes/verify/certificate/[hash].tsx', ['Verify Certificate', '/api/certificates/hash/', 'demo-certificate-hash']],
   ['api/ai-impact-report.md', ['POST /api/proofs', 'trust_score']],
   ['api/certificates.md', ['POST /api/certificates', 'GET /api/certificates/hash/:hash', 'tx_hash']],
-  ['api/storage.md', ['be/uploads/', 'Static', 'POST /api/uploads']],
+  ['api/storage.md', ['be/uploads/', 'Static', 'POST /api/uploads', 'Maximum size: 5 MiB']],
   ['blockchain/README.md', ['Smart contract workspace', 'BNB Smart Chain Testnet']],
   ['README.md', ['BNB Smart Chain', 'Go', 'SolidStart', 'BscScan']],
   ['blockchain/contracts/AidnaraAidRegistry.sol', ['contract AidnaraAidRegistry', 'createCampaign', 'donate']],
@@ -86,7 +86,7 @@ const requiredTerms = [
   ['be/handlers/uploads.go', ['UploadFile', 'SaveFile', 'POST /api/uploads']],
   ['be/services/ai_provider.go', ['CallGeminiJSON']],
   ['be/services/onchain.go', ['ValidateDonationEvent', 'DonationEventExpectation']],
-  ['be/services/storage.go', ['InitStorage']],
+  ['be/services/storage.go', ['InitStorage', 'MaxUploadSize', 'validateUpload', 'campaign-cover must be jpg', 'proof must be image or pdf']],
   ['docs/prd/00-name-options.md', ['Final Name', 'Meaning']],
 ];
 

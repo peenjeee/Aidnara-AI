@@ -30,6 +30,13 @@ Fields:
 - `kind`: `campaign-cover`, `proof`, or `certificate`
 - `file`: uploaded file
 
+Validation:
+
+- Maximum size: 5 MiB
+- `campaign-cover`: `.jpg`, `.jpeg`, `.png`, `.webp`
+- `proof`: `.jpg`, `.jpeg`, `.png`, `.webp`, `.pdf`
+- `certificate`: `.jpg`, `.jpeg`, `.png`, `.pdf`
+
 Response:
 
 ```json

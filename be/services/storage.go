@@ -12,7 +12,8 @@ import (
 )
 
 const (
-	UploadDir = "./uploads"
+	UploadDir     = "./uploads"
+	MaxUploadSize = 5 << 20
 )
 
 // InitStorage ensures the upload directories exist
@@ -33,7 +34,7 @@ func InitStorage() error {
 
 // GenerateFilename generates a secure, random filename while preserving the extension
 func GenerateFilename(originalName string) (string, error) {
-	ext := filepath.Ext(originalName)
+	ext := strings.ToLower(filepath.Ext(originalName))
 	bytes := make([]byte, 16)
 	if _, err := rand.Read(bytes); err != nil {
 		return "", err
@@ -43,17 +44,9 @@ func GenerateFilename(originalName string) (string, error) {
 
 // SaveFile saves a multipart file to the specified kind's directory and returns the public path.
 func SaveFile(kind string, file *multipart.FileHeader) (string, error) {
-	// Map 'kind' to the correct subdirectory
-	subDir := ""
-	switch kind {
-	case "campaign-cover":
-		subDir = "campaign-covers"
-	case "proof":
-		subDir = "proofs"
-	case "certificate":
-		subDir = "certificates"
-	default:
-		return "", fmt.Errorf("invalid storage kind: %s", kind)
+	subDir, err := validateUpload(kind, file)
+	if err != nil {
+		return "", err
 	}
 
 	src, err := file.Open()
@@ -62,13 +55,11 @@ func SaveFile(kind string, file *multipart.FileHeader) (string, error) {
 	}
 	defer src.Close()
 
-	// Ensure unique filename to avoid overwrites
 	filename, err := GenerateFilename(file.Filename)
 	if err != nil {
 		return "", err
 	}
 
-	// Create destination file
 	destPath := filepath.Join(UploadDir, subDir, filename)
 	dest, err := os.Create(destPath)
 	if err != nil {
@@ -80,8 +71,45 @@ func SaveFile(kind string, file *multipart.FileHeader) (string, error) {
 		return "", err
 	}
 
-	// Return public URL path
-	// Assuming fiber serves ./uploads at /uploads
 	publicPath := fmt.Sprintf("/uploads/%s/%s", subDir, filename)
 	return strings.ReplaceAll(publicPath, "\\", "/"), nil
+}
+
+func validateUpload(kind string, file *multipart.FileHeader) (string, error) {
+	if file.Size <= 0 {
+		return "", fmt.Errorf("file is empty")
+	}
+	if file.Size > MaxUploadSize {
+		return "", fmt.Errorf("file exceeds 5 MiB limit")
+	}
+
+	ext := strings.ToLower(filepath.Ext(file.Filename))
+	switch kind {
+	case "campaign-cover":
+		if !oneOf(ext, ".jpg", ".jpeg", ".png", ".webp") {
+			return "", fmt.Errorf("campaign-cover must be jpg, png, or webp")
+		}
+		return "campaign-covers", nil
+	case "proof":
+		if !oneOf(ext, ".jpg", ".jpeg", ".png", ".webp", ".pdf") {
+			return "", fmt.Errorf("proof must be image or pdf")
+		}
+		return "proofs", nil
+	case "certificate":
+		if !oneOf(ext, ".jpg", ".jpeg", ".png", ".pdf") {
+			return "", fmt.Errorf("certificate must be image or pdf")
+		}
+		return "certificates", nil
+	default:
+		return "", fmt.Errorf("invalid storage kind: %s", kind)
+	}
+}
+
+func oneOf(value string, allowed ...string) bool {
+	for _, item := range allowed {
+		if value == item {
+			return true
+		}
+	}
+	return false
 }
